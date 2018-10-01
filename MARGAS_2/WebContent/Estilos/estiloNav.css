@@ -1,0 +1,22 @@
+@charset "ISO-8859-1";
+
+nav {
+	border-style: solid;
+	width: 20%;
+	float:left;
+}
+
+a {
+	display: block;
+}
+
+section {
+	border-style: solid;
+	width: 75%;
+	height: 400px;
+	float:right;
+}
+
+span {
+	display: block;
+}
