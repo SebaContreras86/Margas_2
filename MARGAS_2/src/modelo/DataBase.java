@@ -8,9 +8,9 @@ import java.sql.SQLException;
 
 public class DataBase {
 	private static String Driver = "org.gjt.mm.mysql.Driver";
-	private static String Url = "jdbc:mysql://sql10.freemysqlhosting.net/sql10257011";
-	private static String Usuario = "sql10257011";
-	private static String Password = "gKU9CxzHIC";
+	private static String Url = "jdbc:mysql://localhost/margas_2";//"jdbc:mysql://sql10.freemysqlhosting.net/sql10257011";
+	private static String Usuario = "root";//"sql10257011";
+	private static String Password = "root";//"gKU9CxzHIC";
 	private static Connection Conexion = null;
 	private static CallableStatement Cs = null;
 	private static ResultSet Rs = null;

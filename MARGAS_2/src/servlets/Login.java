@@ -20,6 +20,19 @@ public class Login extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String usuario = request.getParameter("usuario");
 		String password = request.getParameter("password");
+		
+		/* Acá dejamos la ultima ves
+		Usuario usuario = UsuarioDAO.GetOne(usuario, password);
+		
+		if (usuario.getTipo().equals("admin")) {
+			
+		}
+		else {
+			ClienteDAO.GetOne(usuario, password);
+		}
+		
+		*/
+		
 		try {
 			Cliente cliente = ClienteDAO.GetOne(usuario, password);
 			if (cliente != null) {

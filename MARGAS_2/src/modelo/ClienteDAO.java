@@ -31,4 +31,20 @@ public class ClienteDAO {
 		
 		return cliente;
 	}
+
+	public static void Save(Cliente cliente) throws ClassNotFoundException, SQLException {
+		CallableStatement cs = DataBase.GetCallableStatement("{call InsertClienteMasUsuario(?, ?, ?, ?, ?, ?, ?, ?)}");
+		cs.setString(1, cliente.getUsuario());
+		cs.setString(2, cliente.getPassword());
+		cs.setString(3, cliente.getNombre());
+		cs.setString(4, cliente.getApellido());
+		cs.setString(5, cliente.getEmail());
+		cs.setString(6, cliente.getDni());
+		cs.setString(7, cliente.getTelefono());
+		cs.setString(8, cliente.getDireccion());
+		
+		cs.executeQuery();
+		
+		DataBase.Close();
+	}
 }

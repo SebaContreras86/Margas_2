@@ -18,6 +18,7 @@
 		<input type="text" name="telefono" required placeholder="Teléfono">
 		<input type="text" name="direccion" required placeholder="Dirección">
 		<input type="email" name="email" required placeholder="E-Mail">
+		<input type="hidden" name="tipo" value="cliente">
 		<input type="submit" value="Crear cuenta">
 	</form>
 </body>
