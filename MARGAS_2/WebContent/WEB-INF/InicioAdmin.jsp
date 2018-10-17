@@ -8,7 +8,7 @@
 	<title>Insert title here</title>
 </head>
 <body>
-	<h1>Bienvenido, <c:out value="${usuario.getNombre()}"/> </h1>
+	<h1>Administrador: <c:out value="${usuario.getNombre()}"/> </h1>
 	
 	<nav>
 		<ul>

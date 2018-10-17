@@ -8,18 +8,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>Bienvenido, <c:out value="${usuario.getNombre()}"/> </h1>
+	<jsp:include page="InicioCliente.jsp" flush="true"/>
 	
-	<nav>
-		<ul>
-			<li> <a href="#"> Inicio </a> </li>
-			<li> <a href="ServletPedido"> Hacer pedido </a> </li>
-			<li> <a href="#"> Caso de uso </a> </li>
-			<li> <a href="#"> Caso de uso </a> </li>
-			<li> <a href="Logout"> Cerrar sesión </a> </li>
-		</ul>
-	</nav>
-	
-	<h2>Tu pedido fue registrado</h2>
+	<c:forEach items="${pedidos_pendiente}" var="pedido">
+		<c:out value="${pedido.getFecha()}"/> <br> 
+		<c:out value="${pedido.getHora()}"/> <br>
+	</c:forEach>
 </body>
 </html>

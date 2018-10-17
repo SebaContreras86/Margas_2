@@ -1,6 +1,7 @@
 package modelo;
 
 import java.sql.CallableStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -25,5 +26,25 @@ public class PedidoDAO {
 			cs.executeUpdate();
 		}
 	}
-	
+
+	public static ArrayList<Pedido> getAllByUsuario(String dni) throws ClassNotFoundException, SQLException {
+		ArrayList<Pedido> lista_pedidos = new ArrayList<Pedido>();
+		
+		CallableStatement cs = DataBase.GetCallableStatement("{call PedidosPendientes(?)}");
+		cs.setString(1, dni);
+		
+		ResultSet rs = cs.executeQuery();
+		
+		Pedido pedido = null;
+		while (rs.next()) {
+			pedido = new Pedido(dni);
+			pedido.setFecha(rs.getDate("fecha"));
+			pedido.setHora(rs.getTime("hora"));
+			pedido.setEstado(rs.getString("estado"));
+			
+			lista_pedidos.add(pedido);
+		}
+		
+		return lista_pedidos;
+	}
 }

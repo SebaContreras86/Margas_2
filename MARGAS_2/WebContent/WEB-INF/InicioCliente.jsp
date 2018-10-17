@@ -8,13 +8,13 @@
 	<title>Insert title here</title>
 </head>
 <body>
-	<h1>Bienvenido, <c:out value="${cliente.getNombre()}"/> </h1>
+	<h1>Bienvenido, <c:out value="${usuario.getNombre()}"/> </h1>
 	
 	<nav>
 		<ul>
 			<li> <a href="#"> Inicio </a> </li>
 			<li> <a href="ServletPedido"> Hacer pedido </a> </li>
-			<li> <a href="#"> Caso de uso </a> </li>
+			<li> <a href="ServletCancelarPedido"> Cancelar pedido </a> </li>
 			<li> <a href="#"> Caso de uso </a> </li>
 			<li> <a href="Logout"> Cerrar sesión </a> </li>
 		</ul>

@@ -2,8 +2,15 @@
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
 <html>
 <head>
+<meta http-equiv="expires" content="0">
+ 
+<meta http-equiv="Cache-Control" content="no-cache">
+ 
+<meta http-equiv="Pragma" CONTENT="no-cache">
+
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 </head>
@@ -25,10 +32,10 @@
 				<td> <c:out value="${producto.getStock()}"/> </td>
 				<td> <c:out value="${producto.getPrecio()}"/> </td>
 				<td>
-					<form action="#">
+					<form action="ServletPedido" method="post">
 						<input type="number" name="cantidad" value="0" min="1" max="${producto.getStock()}">
 						<input type="hidden" name="id" value="${producto.getId()}">
-						<input type="submit" name="agregar" value="Agregar">
+						<input type="submit" name="opcion" value="Agregar">
 					</form>
 				</td>
 			</tr>
@@ -52,7 +59,7 @@
 				<td>
 					<form action="ServletPedido" method="post">
 						<input type="hidden" name="id_producto" value="${linea.getTipoGarrafa().getId()}"/>
-						<input type="submit" name="quitar" value="Quitar">
+						<input type="submit" name="opcion" value="Quitar">
 					</form> 
 				</td>
 			</tr>
@@ -62,7 +69,7 @@
 			<td> $<c:out value="${ctrl_pedido.getPedido().getTotal()}"/> </td>
 			<td>
 				<form action="ServletPedido" method="post">
-					<input type="submit" name="enviar" value="Enviar pedido">
+					<input type="submit" name="opcion" value="Enviar pedido">
 				</form> 
 			</td> 
 		</tr>

@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import modelo.Cliente;
-import modelo.ClienteDAO;
+import modelo.Usuario;
+import modelo.UsuarioDAO;
 import modelo.DataBase;
 import modelo.Usuario;
 import modelo.UsuarioDAO;
@@ -20,9 +20,9 @@ public class ServletCrearCuenta extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String usuario = request.getParameter("usuario");
+		String user_name = request.getParameter("usuario");
 		try {
-			if (DataBase.Existe(usuario)) {
+			if (DataBase.Existe(user_name)) {
 				request.getRequestDispatcher("/CrearCuenta.jsp").forward(request, response);
 			}
 			else {
@@ -31,38 +31,25 @@ public class ServletCrearCuenta extends HttpServlet {
 				String apellido = request.getParameter("apellido");
 				String email = request.getParameter("email");
 				String dni = request.getParameter("dni");
-				
 				String tipo = request.getParameter("tipo");
-				if (tipo.equals("cliente")) {
-					String telefono = request.getParameter("telefono");
-					String direccion = request.getParameter("direccion");
+				String direccion = request.getParameter("direccion");
+				String telefono = request.getParameter("telefono");
+				
+				Usuario usuario = new Usuario();
+				
+				usuario.setUsuario(user_name);
+				usuario.setPassword(password);
+				usuario.setNombre(nombre);
+				usuario.setApellido(apellido);
+				usuario.setEmail(email);
+				usuario.setTelefono(telefono);
+				usuario.setDni(dni);
+				usuario.setDireccion(direccion);
+				usuario.setTipo(tipo);
 					
-					Cliente cliente = new Cliente();
-					cliente.setUsuario(usuario);
-					cliente.setPassword(password);
-					cliente.setNombre(nombre);
-					cliente.setApellido(apellido);
-					cliente.setEmail(email);
-					cliente.setTelefono(telefono);
-					cliente.setDni(dni);
-					cliente.setDireccion(direccion);
-					
-					ClienteDAO.Save(cliente);
-					
-					//response.sendRedirect("localhost:8080/MARGAS_2/IniciarSesion.jsp");
-					//request.getRequestDispatcher("/WEB-INF/InicioCliente.jsp").forward(request, response);
-				}
-				else {
-					Usuario user = new Usuario();
-					user.setUsuario(usuario);
-					user.setPassword(password);
-					user.setNombre(nombre);
-					user.setApellido(apellido);
-					user.setDni(dni);
-					user.setEmail(email);
-					
-					UsuarioDAO.Save(user);
-				}
+				UsuarioDAO.Save(usuario);
+				
+				response.sendRedirect("http://localhost:8080/MARGAS_2/IniciarSesion.jsp");
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();

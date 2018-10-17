@@ -40,17 +40,24 @@ public class ControladorPedido {
 		this.pedido.eliminarLinea(id_producto);
 	}
 
-	public void enviar() throws ClassNotFoundException, SQLException {
-		PedidoDAO.Save(this.pedido);
-		ArrayList<LineaDePedido> lineas = pedido.getLineas();
-		TipoGarrafa tipoGarrafa = null;
-		int cantidad = 0;
-		for (LineaDePedido lineaDePedido : lineas) {
-			tipoGarrafa = lineaDePedido.getTipoGarrafa();
-			cantidad = lineaDePedido.getCantidad();
-			tipoGarrafa.actualizarStock(-cantidad);
+	public boolean enviar() throws ClassNotFoundException, SQLException {
+		
+		ArrayList<LineaDePedido> lineas = pedido.getLineas(); 
+		
+		if (!lineas.isEmpty()) {
+			PedidoDAO.Save(this.pedido);
 			
-			TipoGarrafaDAO.UpdateStock(tipoGarrafa);
+			TipoGarrafa tipoGarrafa = null;
+			int cantidad = 0;
+			for (LineaDePedido lineaDePedido : lineas) {
+				tipoGarrafa = lineaDePedido.getTipoGarrafa();
+				cantidad = lineaDePedido.getCantidad();
+				tipoGarrafa.actualizarStock(-cantidad);
+				
+				TipoGarrafaDAO.UpdateStock(tipoGarrafa);
+			}
 		}
+		
+		return !lineas.isEmpty();
 	}
 }
