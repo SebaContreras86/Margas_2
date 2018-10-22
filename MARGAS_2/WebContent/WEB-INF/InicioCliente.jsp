@@ -15,7 +15,7 @@
 			<li> <a href="#"> Inicio </a> </li>
 			<li> <a href="ServletPedido"> Hacer pedido </a> </li>
 			<li> <a href="ServletCancelarPedido"> Cancelar pedido </a> </li>
-			<li> <a href="#"> Caso de uso </a> </li>
+			<li> <a href="ServletModificarDatos"> Modificar datos personales </a> </li>
 			<li> <a href="Logout"> Cerrar sesión </a> </li>
 		</ul>
 	</nav>

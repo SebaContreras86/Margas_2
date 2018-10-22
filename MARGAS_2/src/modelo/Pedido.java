@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Pedido {
+	private int nro_pedido;
 	private String dni;
 	private Date fecha;
 	private Time hora;
@@ -14,6 +15,14 @@ public class Pedido {
 	public Pedido(String dni) {
 		this.dni = dni;
 		this.lineas = new ArrayList<>();
+	}
+	
+	public int getNro_pedido() {
+		return nro_pedido;
+	}
+
+	public void setNro_pedido(int nro_pedido) {
+		this.nro_pedido = nro_pedido;
 	}
 
 	public String getDni() {

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import modelo.Pedido;
+import modelo.PedidoDAO;
 import modelo.Usuario;
 
 @WebServlet({ "/ServletCancelarPedido", "/servletcancelarpedido" })
@@ -27,11 +28,17 @@ public class ServletCancelarPedido extends HttpServlet {
 		try {
 			ArrayList<Pedido> lista_pedidos = usuario.getPedidosPendientes();
 			if (!lista_pedidos.isEmpty()) {
-				request.getSession().setAttribute("pedidos_pendiente", lista_pedidos);
+				/*==================  ==================*/
+				if (request.getParameter("eliminar") != null) {
+					int nro_pedido = Integer.parseInt(request.getParameter("nro_pedido"));
+					PedidoDAO.UpdateEstado(nro_pedido, "cancelado");
+				}
+				request.getSession().setAttribute("pedidos_pendiente", usuario.getPedidosPendientes());
 				request.getRequestDispatcher("/WEB-INF/CancelarPedido.jsp").forward(request, response);
 			}
 			else {
-				
+				request.setAttribute("mensaje_no_hay_pedidos", "No hay pedidos pendientes");
+				request.getRequestDispatcher("/WEB-INF/CancelarPedido.jsp").forward(request, response);
 			}
 			
 		} catch (ClassNotFoundException | SQLException e) {

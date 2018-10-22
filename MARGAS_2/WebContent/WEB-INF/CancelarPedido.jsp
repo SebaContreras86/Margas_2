@@ -10,9 +10,33 @@
 <body>
 	<jsp:include page="InicioCliente.jsp" flush="true"/>
 	
-	<c:forEach items="${pedidos_pendiente}" var="pedido">
-		<c:out value="${pedido.getFecha()}"/> <br> 
-		<c:out value="${pedido.getHora()}"/> <br>
+	<c:if test="${pedidos_pendiente != null}">
+	<table border="1">
+		<tr>
+			<th>ID</th>
+			<th>Fecha</th>
+			<th>Hora</th>
+			<th>Estado</th>
+			<th>Cancelar</th>
+		</tr>
+		
+		<c:forEach items="${pedidos_pendiente}" var="pedido">
+		<tr>
+			<td> <c:out value="${pedido.getNro_pedido()}"/> </td> 
+			<td> <c:out value="${pedido.getFecha()}"/> </td> 
+			<td> <c:out value="${pedido.getHora()}"/> </td> 
+			<td> <c:out value="${pedido.getEstado()}"/> </td>
+			<td>
+				<form action="ServletCancelarPedido" method="post">
+					<input type="hidden" name="nro_pedido" value="${pedido.getNro_pedido()}">
+					<input type="submit" name="eliminar" value="Cancelar pedido">
+				</form>
+			</td>
+		</tr> 
 	</c:forEach>
+	</table>
+	</c:if>
+	<c:out value="${mensaje_no_hay_pedidos}"/>
+	
 </body>
 </html>

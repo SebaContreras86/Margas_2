@@ -25,6 +25,7 @@ public class PedidoDAO {
 			
 			cs.executeUpdate();
 		}
+		DataBase.Close();
 	}
 
 	public static ArrayList<Pedido> getAllByUsuario(String dni) throws ClassNotFoundException, SQLException {
@@ -38,6 +39,7 @@ public class PedidoDAO {
 		Pedido pedido = null;
 		while (rs.next()) {
 			pedido = new Pedido(dni);
+			pedido.setNro_pedido(rs.getInt("nro_pedido"));
 			pedido.setFecha(rs.getDate("fecha"));
 			pedido.setHora(rs.getTime("hora"));
 			pedido.setEstado(rs.getString("estado"));
@@ -45,6 +47,18 @@ public class PedidoDAO {
 			lista_pedidos.add(pedido);
 		}
 		
+		DataBase.Close();
+		
 		return lista_pedidos;
+	}
+
+	public static void UpdateEstado(int nro_pedido, String estado) throws ClassNotFoundException, SQLException {
+		CallableStatement cs = DataBase.GetCallableStatement("call UpdateEstado(?, ?)");
+		cs.setInt(1, nro_pedido);
+		cs.setString(2, estado);
+		
+		cs.executeUpdate();
+		
+		DataBase.Close();
 	}
 }
